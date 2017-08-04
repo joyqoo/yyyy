@@ -15,7 +15,7 @@ public class SearchViewModel {
     private List<Car> carList;
     private Car selectedCar;
 
-    private CarService carService = new CarData();
+    private CarService carService1 = new CarData();
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
@@ -37,6 +37,6 @@ public class SearchViewModel {
     @Command("search")
     @NotifyChange("carList")
     public void search(){
-        carList = carService.search(keyword);
+        carList = carService1.search(keyword);
     }
 }

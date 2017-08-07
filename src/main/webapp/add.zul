@@ -1,0 +1,121 @@
+
+<window title="新增頁面" width="600px" border="normal" apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('addvm') @init('viewModel.AddViewModel')">
+     <panel >
+        <panelchildren>
+            <menubar id="menubar" width="100%">
+                <menu label="編輯">
+                    <menupopup>
+                        <menuitem label="新增" disabled="true" onClick="alert(self.label)" image="img/add.png" />
+                        <menuitem label="查詢" href="index.zul" image="/widgets/menu/drop-down_menu/img/file_open.png" />
+                        <menuitem label="修改" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_save.png" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="導出" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_import.png" />
+                        <menuitem label="導入" disabled="true"/>
+                        <menuseparator></menuseparator>
+                        <menuitem label="離開" disabled="true"/>
+                    </menupopup>
+                </menu>
+                <menu label="操作">
+                    <menupopup>
+                        <menuitem label="返回" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_undo.png" />
+                        <menuitem label="上一步" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_redo.png" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="剪下" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_cut.png" />
+                        <menuitem label="複製" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_copy.png" />
+                        <menuitem label="貼上" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_paste.png" />
+                        <menuseparator></menuseparator>
+                        <menuitem label="全選" disabled="true"/>
+                    </menupopup>
+                </menu>
+                <menu label="幫助">
+                    <menupopup>
+                         <menuitem label="關於官方" target="_zkdemo" href="http://www.zkoss.org/support/about" />     
+                    </menupopup>
+                </menu>
+            </menubar>
+            <div height="450px" sclass="content">
+                <hbox align="center">  
+                </hbox>
+         <groupbox form="@id('fx') @load(vm.currentBook) @save(vm.currentBook, before='save')">
+            <grid>
+                 <columns>
+                    <column hflex="1" />
+                    <column hflex="2" />
+                    <column hflex="1" />
+                    <column hflex="2" />
+                    <column hflex="1" />
+                    <column hflex="2" />
+                </columns>       
+            <rows>
+                <row>
+                    <cell>
+                        <label value="品牌" />
+                    </cell>
+                    <cell>
+                        <combobox id="combo" width="300px" autodrop="true" buttonVisible="false" value="@save(addvm.car.make)" /> 
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <label value="型號" />
+                    </cell>
+                    <cell>
+                        <textbox width="300px" value="@save(addvm.car.model)" />
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <label value="價錢" />
+                    </cell>
+                    <cell>
+                        <textbox width="300px" value="@save(addvm.car.price)" />
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <label value="說明描述" />
+                    </cell>
+                    <cell>
+                        <textbox rows="6" width="350px" value="@save(addvm.car.description)" />
+                    </cell>
+                </row>               
+              </rows>
+             </grid>
+          </groupbox>
+             <button label="新增" image="img/add.png" onClick="@command('insert')" />
+            
+            </div>
+        </panelchildren>
+    </panel>
+    <zscript>
+    String[] carmark = { 
+        "Alfa Romeo", "Audi", "Acura", "Aston Martin", 
+        "BMW", "Benz", "Bentley", "Bugatti","Buick",
+        "Citroen", "Cadillac", "Chevrolet", "Chrysler",
+        "Daihatsu", "Dodge",  
+        "Ferrari", "Ford", "Fiat",
+        "GMC",
+        "Honda", "Hyundai", "Holden",
+        "Infiniti", "Isuzu",
+        "Jaguar", "Jeep",
+        "Kia", "Koenigsegg",
+        "Lexus", "Lamborghini", "Lancia", "Land Rover","Lotus",
+        "Mitsubishi", 
+        "Porsche", "Peugeot", 
+        "Rolls-Royce", "RIA",
+        "Subaru", 
+        "Toyota",    
+        "Volkswagen", 
+        
+        "愛快羅密歐","寶馬","法拉利","保時捷","梅賽德斯-賓士",
+        "福士","福特","本田","奧迪","三菱","現代","寶獅","豐田",
+        "勞斯萊斯","富士","凌志","極品","賓利","雪鐵龍","奧斯頓·馬丁",
+        "布卡堤","別克","凱迪拉克","雪佛蘭","克萊斯勒","大發","道奇","飛雅特",
+        "吉姆西","霍頓","英菲尼迪","五十鈴","捷豹","吉普","起亞","科尼賽克",
+        "藍寶堅尼","蘭吉雅","荒原路華","蓮花" 
+    };
+     ListModel dictModel= new SimpleListModel(carmark);
+     combo.setModel(dictModel);
+    </zscript>
+</window>

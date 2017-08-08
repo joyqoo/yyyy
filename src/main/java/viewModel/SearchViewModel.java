@@ -27,6 +27,7 @@ public class SearchViewModel {
 
     public List<Car> getCarList() {
         return carList;
+
     }
 
     public void setSelectedCar(Car selectedCar) {
@@ -40,6 +41,7 @@ public class SearchViewModel {
     @Command("search")
     @NotifyChange("carList")
     public void search() {
+
         carList = carService.search(keyword);
     }
 }

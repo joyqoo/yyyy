@@ -6,9 +6,9 @@
             <menubar id="menubar" width="100%">
                 <menu label="編輯">
                     <menupopup>
-                        <menuitem label="新增" disabled="true" onClick="alert(self.label)" image="img/add.png" />
-                        <menuitem label="查詢" href="index.zul" image="/widgets/menu/drop-down_menu/img/file_open.png" />
-                        <menuitem label="修改" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_save.png" />
+                        <menuitem label="查詢" href="index.zul" image="img/len.png" />
+                        <menuitem label="新增" disabled="true" image="img/add.png" />
+                        <menuitem label="修改" disabled="true" image="img/update.png" />
                         <menuseparator></menuseparator>
                         <menuitem label="導出" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_import.png" />
                         <menuitem label="導入" disabled="true"/>
@@ -37,7 +37,6 @@
             <div height="450px" sclass="content">
                 <hbox align="center">  
                 </hbox>
-         <groupbox form="@id('fx') @load(vm.currentBook) @save(vm.currentBook, before='save')">
             <grid>
                  <columns>
                     <column hflex="1" />
@@ -53,7 +52,7 @@
                         <label value="品牌" />
                     </cell>
                     <cell>
-                        <combobox id="combo" width="300px" autodrop="true" buttonVisible="false" value="@save(addvm.car.make)" /> 
+                        <combobox id="model" width="300px" autodrop="true" buttonVisible="false" value="@save(addvm.car.model)" /> 
                     </cell>
                 </row>
                 <row>
@@ -61,7 +60,7 @@
                         <label value="型號" />
                     </cell>
                     <cell>
-                        <textbox width="300px" value="@save(addvm.car.model)" />
+                        <textbox id="make" width="300px" value="@save(addvm.car.make)" />
                     </cell>
                 </row>
                 <row>
@@ -69,7 +68,7 @@
                         <label value="價錢" />
                     </cell>
                     <cell>
-                        <textbox width="300px" value="@save(addvm.car.price)" />
+                        <textbox id="price" width="300px" value="@save(addvm.car.price)" />
                     </cell>
                 </row>
                 <row>
@@ -77,14 +76,24 @@
                         <label value="說明描述" />
                     </cell>
                     <cell>
-                        <textbox rows="6" width="350px" value="@save(addvm.car.description)" />
+                        <textbox id="desp" rows="6" width="350px" value="@save(addvm.car.description)" />
                     </cell>
                 </row>               
-              </rows>
-             </grid>
-          </groupbox>
-             <button label="新增" image="img/add.png" onClick="@command('insert')" />
-            
+            </rows>
+         </grid>
+             <button label="新增" image="img/add.png" onClick="@command('insert')" >
+                <attribute name="onClick">
+                    <![CDATA[
+                    int msg = Messagebox.show("新增成功", "新增成功", Messagebox.OK, Messagebox.INFORMATION);
+                    if(msg == 1) {
+                        model.setValue("");
+                        make.setValue("");
+                        price.setValue("");
+                        desp.setValue("");
+                    }
+                    ]]>
+                </attribute>
+            </button>
             </div>
         </panelchildren>
     </panel>
@@ -116,6 +125,6 @@
         "藍寶堅尼","蘭吉雅","荒原路華","蓮花" 
     };
      ListModel dictModel= new SimpleListModel(carmark);
-     combo.setModel(dictModel);
+     model.setModel(dictModel);
     </zscript>
 </window>

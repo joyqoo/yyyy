@@ -6,8 +6,9 @@
             <menubar id="menubar" width="100%">
                 <menu label="編輯">
                     <menupopup>
-                        <menuitem label="新增" href="add.zul" onClick="alert(self.label)" image="img/add.png" />
-                        <menuitem label="修改" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_save.png" />
+                        <menuitem label="查詢" disabled="true" image="img/len.png" />
+                        <menuitem label="新增" href="add.zul" image="img/add.png" />
+                        <menuitem label="修改" href="update.zul" onClick="@command('update')" image="img/update.png" />
                         <menuseparator></menuseparator>
                         <menuitem label="導出" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_import.png" />
                         <menuitem label="導入" disabled="true"/>

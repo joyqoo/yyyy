@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-
 public class CarData implements CarService{
 
 	private static List<Car> carList= new ArrayList<>();
@@ -17,14 +15,14 @@ public class CarData implements CarService{
                         "LS460L",
                         "LS 460L及LS 460搭載4.6升V8引擎，結合高科技VVT-iE電子式進氣閥門正時控制系統、Dual VVT-i進排氣可變汽門正時控制系統以及ACIS可變進氣歧管系統，達到高動力及平順操控性的最佳表現，擁有387 PS剽悍馬力，實踐駕馭科技的最高理想。",
                         "/img/LS460L.jpg",
-                        536363));
+                        4590000));
         carList.add(
                 new Car(id++,
                         "LEXUS",
                         "LS600hL",
                         "全新LS 600hL及LS 600h搭載5.0升V8 Atkinson循環引擎，擁有絕佳引擎燃燒效能，同時採用D-4S燃油多重噴射系統，擁有強大引擎動力輸出394.4 PS，結合Full Hybrid技術，綜效馬力更高達445 PS，精湛演繹傲人的動力表現。",
                         "/img/LS600hL.jpg",
-                        944555));
+                        6430000));
         carList.add(
                 new Car(id++,
                         "Toyota",
@@ -42,18 +40,21 @@ public class CarData implements CarService{
                         589000));
         carList.add(
                 new Car(id++,
-                        "Mitsubishi",
-                        "Sigma",
-                        "The third-generation of Japanese car Mitsubishi Galant, dating from 1976, was divided into two models: the Galant Sigma (for the sedan and wagon) and the Galant Lambda (the coupe). The former was sold in many markets as the Mitsubishi Galant (without the word 'Sigma') and in Australia as the Chrysler Sigma (until 1980, after which it became the Mitsubishi Sigma). Strangely, in New Zealand it was badged as 'Galant Sigma' but colloquially referred to as the 'Sigma', a name it formally adopted after 1980.",
-                        "/widgets/getting_started/img/car5.png",
-                        54120));
+                        "Mazda",
+                        "Mazda3",
+                        "Mazda3 以新世代造車理念打造，融合了SKYACTIV全新動能科技、KODO魂動設計及人馬一体。顛覆傳統中型房車格局，尤以SKYACTIV全新動能科技，追求「極致輕量化」與「最適化懸吊」，突破傳統格局，Mazda3在一體感、安全感、舒適感中找到了「三感和諧」的黃金交集。 \r\n" +
+                        "\r\n" +
+                        "在車子配備上，Mazda3 也是首款提供 MZD Connect 行動網路連線的 Mazda 車款，讓駕駛者在駕駛過程中也能享受行車及各種娛樂資訊。",
+                        "/img/Mazda3.png",
+                        739000));
         carList.add(
                 new Car(id++,
-                        "Mitsubishi",
-                        "Challenger",
-                        "The Mitsubishi Challenger, called Mitsubishi Pajero Sport in most export markets, Mitsubishi Montero Sport in Spanish-speaking countries (including North America), Mitsubishi Shogun Sport in the UK and Mitsubishi Nativa in Central and South Americas (the Challenger name was also used in Australia), is a medium sized SUV built by the Mitsubishi Motors Corporation. It was released in 1997, and is still built as of 2006, although it's no longer available in its native Japan since the end of 2003.",
-                        "/widgets/getting_started/img/car6.png",
-                        58750));
+                        "Mazda",
+                        "MAZDA MX-5",
+                        "MAZDA MX-5 繼榮獲日本年度風雲車(JCOTY) 及德國紅點設計大獎最高殊榮Best of the Best 等多國獎項肯定後，更獲頒2016世界年度風雲車(WCOTY) 以及年度最佳汽車設計(WCDOTY) 雙料大獎。\r\n" +
+                        "而甫推出的MAZDA MX-5 RF車款，延續魂動美學，加上專屬的 Fastback斜背式設計，以剛柔並濟的迷人線條，與性感不失優雅的硬頂外型，一舉榮膺2017德國紅點設計大獎Best of the Best，為敞篷跑車做了全新演繹，也讓原本熠熠不俗的MAZDA MX-5車系再添榮耀。以SKYACTIV TECHNOLOGY 全新動能科技所打造而生的新一代MAZDA MX-5，極致輕量化造就更勝前代的1,088kg 輕巧重量，並達到眾多經典跑車夢寐以求的前後車重50：50完美比例，讓駕駛者可以輕易透過身體與方向盤掌握車身動態，靈活完成敏銳操控，達到和諧的「人馬一体」境界，釋放前所未有的駕馭快感。",
+                        "/img/MAZDA MX-5.png",
+                        1320000));
         carList.add(
                 new Car(id++,
                         "Honda",
@@ -95,7 +96,6 @@ public class CarData implements CarService{
 
 	@Override
     public List<Car> findAll(){
-	    System.out.println("CarList:" + carList);
 		return carList;
 	}
 
@@ -120,4 +120,18 @@ public class CarData implements CarService{
         car.setId(id++);
         carList.add(car);
     }
+
+    @Override
+    public void delete(Car car) {
+        carList.remove(car);
+        System.out.println("carList delete 進來了");
+    }
+
+    @Override
+    public void update(Integer carNum, Car car) {
+        carList.set(carNum, car);
+
+    }
+
+
 }

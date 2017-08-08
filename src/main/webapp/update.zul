@@ -1,13 +1,13 @@
 
-<window title="新增頁面" width="700px" border="normal" apply="org.zkoss.bind.BindComposer"
-    viewModel="@id('addvm') @init('viewModel.AddViewModel')">
+<window title="修改頁面" width="700px" border="normal" apply="org.zkoss.bind.BindComposer"
+    viewModel="@id('vm') @init('viewModel.SearchViewModel')">
      <panel >
         <panelchildren>
             <menubar id="menubar" width="100%">
                 <menu label="編輯">
                     <menupopup>
                         <menuitem label="查詢" href="index.zul" image="img/len.png" />
-                        <menuitem label="新增" disabled="true" image="img/add.png" />
+                        <menuitem label="新增" href="add.zul" image="img/add.png" />
                         <menuitem label="修改" disabled="true" image="img/update.png" />
                         <menuseparator></menuseparator>
                         <menuitem label="導出" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_import.png" />
@@ -18,12 +18,12 @@
                 </menu>
                 <menu label="操作">
                     <menupopup>
-                        <menuitem label="返回" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_undo.png" />
+                        <menuitem label="返回" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_undo.png" />
                         <menuitem label="上一步" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_redo.png" />
                         <menuseparator></menuseparator>
-                        <menuitem label="剪下" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_cut.png" />
-                        <menuitem label="複製" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_copy.png" />
-                        <menuitem label="貼上" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/edit_paste.png" />
+                        <menuitem label="剪下" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_cut.png" />
+                        <menuitem label="複製" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_copy.png" />
+                        <menuitem label="貼上" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_paste.png" />
                         <menuseparator></menuseparator>
                         <menuitem label="全選" disabled="true"/>
                     </menupopup>
@@ -47,12 +47,20 @@
                     <column hflex="2" />
                 </columns>       
             <rows>
+                 <row>
+                    <cell>
+                        <label value="編號" />
+                    </cell>
+                    <cell>
+                        <textbox id="id" width="300px" value="@bind(vm.selectedCar.id)" /> 
+                    </cell>
+                </row>
                 <row>
                     <cell>
                         <label value="品牌" />
                     </cell>
                     <cell>
-                        <combobox id="model" width="300px" autodrop="true" buttonVisible="false" value="@save(addvm.car.model)" /> 
+                        <combobox id="model" width="300px" autodrop="true" buttonVisible="false" value="@bind(vm.selectedCar.model)" /> 
                     </cell>
                 </row>
                 <row>
@@ -60,7 +68,7 @@
                         <label value="型號" />
                     </cell>
                     <cell>
-                        <textbox id="make" width="300px" value="@save(addvm.car.make)" />
+                        <textbox id="make" width="300px" value="@bind(vm.selectedCar.make)" />
                     </cell>
                 </row>
                 <row>
@@ -68,7 +76,7 @@
                         <label value="價錢" />
                     </cell>
                     <cell>
-                        <textbox id="price" width="300px" value="@save(addvm.car.price)" />
+                        <textbox id="price" width="300px" value="@bind(vm.selectedCar.price)" />
                     </cell>
                 </row>
                 <row>
@@ -76,18 +84,19 @@
                         <label value="說明描述" />
                     </cell>
                     <cell>
-                        <textbox id="desp" rows="6" width="350px" value="@save(addvm.car.description)" />
+                        <textbox id="desp" rows="6" width="350px" value="@bind(vm.selectedCar.description)" />
                     </cell>
                 </row>               
             </rows>
          </grid>
-             <button label="新增" image="img/add.png" onClick="@command('insert')" >
+             <button label="確認修改" image="img/update.png" onClick="@command('update')" >
                 <attribute name="onClick">
                     <![CDATA[
-                    Messagebox.show("新增成功", "新增成功", Messagebox.OK, Messagebox.INFORMATION);        
+                    Messagebox.show("修改成功", "修改成功", Messagebox.OK, Messagebox.INFORMATION);
                     ]]>
                 </attribute>
             </button>
+            <button label="取消" />
             </div>
         </panelchildren>
     </panel>

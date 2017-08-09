@@ -14,8 +14,34 @@ public class SearchViewModel {
     private String keyword;
     private List<Car> carList;
     private Car selectedCar;
-
+    private boolean updateBox = false;
+    private boolean fileBox = true;
+    private boolean updateTab = false;
     private CarService carService = new CarData();
+
+    public boolean isUpdateTab() {
+        return updateTab;
+    }
+
+    public void setUpdateTab(boolean updateTab) {
+        this.updateTab = updateTab;
+    }
+
+    public boolean isFileBox() {
+        return fileBox;
+    }
+
+    public void setFileBox(boolean fileBox) {
+        this.fileBox = fileBox;
+    }
+
+    public boolean isUpdateBox() {
+        return updateBox;
+    }
+
+    public void setUpdateBox(boolean updateBox) {
+        this.updateBox = updateBox;
+    }
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
@@ -27,7 +53,6 @@ public class SearchViewModel {
 
     public List<Car> getCarList() {
         return carList;
-
     }
 
     public void setSelectedCar(Car selectedCar) {
@@ -43,23 +68,7 @@ public class SearchViewModel {
     public void search() {
         carList = carService.search(keyword);
     }
-     /*BUG!確認刪除按鈕後,List不會馬上刪除*/
-//    @Command("delete")
-//    @NotifyChange("carList")
-//    public void delete() {
-//        Messagebox.show("是否確認刪除?",
-//                "確認刪除", Messagebox.OK | Messagebox.CANCEL,
-//                Messagebox.QUESTION,
-//                new org.zkoss.zk.ui.event.EventListener() {
-//                    @Override
-//                    public void onEvent(Event e)throws Exception  {
-//                        if (Messagebox.ON_OK.equals(e.getName())) {
-//                            carService.delete(selectedCar);
-//                        }
-//                    }
-//                });
-//
-//    }
+
     /*會直接刪除List的資料*/
     @Command("delete")
     @NotifyChange("carList")
@@ -67,10 +76,33 @@ public class SearchViewModel {
       carService.delete(selectedCar);
     }
 
-    @Command("update")
+    @Command
+    @NotifyChange({"updateBox", "fileBox"})
     public void update() {
-        Integer carid = carList.indexOf(selectedCar);
+        int carid = carList.indexOf(selectedCar);
         carService.update(carid, selectedCar);
+        System.out.println("carid : "+carid);
+        updateBox = false;
+        fileBox = true;
     }
+
+    /*顯示修改畫面*/
+    @Command("showUpdateBox")
+    @NotifyChange({"updateBox", "fileBox","updateTab"})
+    public void showUpdateBox() {
+        updateBox = true;
+        fileBox = false;
+        updateTab = true;
+    }
+
+    @Command("cancelUpdate")
+    @NotifyChange({"updateBox", "fileBox"})
+    public void cancelUpdateBox() {
+        updateBox= false;
+        fileBox = true;
+    }
+
+
+
 
 }

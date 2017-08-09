@@ -124,13 +124,14 @@ public class CarData implements CarService{
     @Override
     public void delete(Car car) {
         carList.remove(car);
-        System.out.println("carList delete 進來了");
+        System.out.println("carList delete 成功");
     }
 
     @Override
     public void update(Integer carNum, Car car) {
         carList.set(carNum, car);
-
+        System.out.println("update car : "+ car );
+        System.out.println("update : "+ carNum );
     }
 
 

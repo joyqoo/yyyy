@@ -11,6 +11,8 @@ public class AddViewModel {
     private Car car = new Car();
     private CarService carService = new CarData();
 
+
+
     public Car getCar() {
         return car;
     }
@@ -20,11 +22,7 @@ public class AddViewModel {
 
     @Command("insert")
     public void insert() {
-        System.out.println("insert進來囉");
-        System.out.println("CAR:" + car);
         carService.insert(car);
     }
-
-
 
 }

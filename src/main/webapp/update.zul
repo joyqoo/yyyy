@@ -1,42 +1,4 @@
-
-<window title="修改頁面" width="700px" border="normal" apply="org.zkoss.bind.BindComposer"
-    viewModel="@id('vm') @init('viewModel.SearchViewModel')">
-     <panel >
-        <panelchildren>
-            <menubar id="menubar" width="100%">
-                <menu label="編輯">
-                    <menupopup>
-                        <menuitem label="查詢" href="index.zul" image="img/len.png" />
-                        <menuitem label="新增" href="add.zul" image="img/add.png" />
-                        <menuitem label="修改" disabled="true" image="img/update.png" />
-                        <menuseparator></menuseparator>
-                        <menuitem label="導出" onClick="alert(self.label)" image="/widgets/menu/drop-down_menu/img/file_import.png" />
-                        <menuitem label="導入" disabled="true"/>
-                        <menuseparator></menuseparator>
-                        <menuitem label="離開" disabled="true"/>
-                    </menupopup>
-                </menu>
-                <menu label="操作">
-                    <menupopup>
-                        <menuitem label="返回" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_undo.png" />
-                        <menuitem label="上一步" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_redo.png" />
-                        <menuseparator></menuseparator>
-                        <menuitem label="剪下" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_cut.png" />
-                        <menuitem label="複製" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_copy.png" />
-                        <menuitem label="貼上" disabled="true" image="/widgets/menu/drop-down_menu/img/edit_paste.png" />
-                        <menuseparator></menuseparator>
-                        <menuitem label="全選" disabled="true"/>
-                    </menupopup>
-                </menu>
-                <menu label="幫助">
-                    <menupopup>
-                         <menuitem label="關於官方" target="_zkdemo" href="http://www.zkoss.org/support/about" />     
-                    </menupopup>
-                </menu>
-            </menubar>
-            <div height="450px" sclass="content">
-                <hbox align="center">  
-                </hbox>
+<window>
             <grid>
                  <columns>
                     <column hflex="1" />
@@ -52,7 +14,7 @@
                         <label value="編號" />
                     </cell>
                     <cell>
-                        <textbox id="id" width="300px" value="@bind(vm.selectedCar.id)" /> 
+                        <textbox id="id" width="300px" readonly="true" value="@load(vm.selectedCar.id) "  /> 
                     </cell>
                 </row>
                 <row>
@@ -86,20 +48,24 @@
                     <cell>
                         <textbox id="desp" rows="6" width="350px" value="@bind(vm.selectedCar.description)" />
                     </cell>
-                </row>               
+                </row>
+                <row>
+                    <cell></cell>
+                    <cell>
+                        <button label="確認修改" image="img/update.png" onClick="@command('update')" >
+                            <attribute name="onClick">
+                                <![CDATA[
+                                Messagebox.show("修改成功", "修改成功", Messagebox.OK, Messagebox.INFORMATION); 
+                                ]]> 
+                            </attribute>
+                        </button>
+                        <button label="取消" onClick="@command('cancelUpdate')"/>                    
+                    </cell>
+                </row>                 
             </rows>
          </grid>
-             <button label="確認修改" image="img/update.png" onClick="@command('update')" >
-                <attribute name="onClick">
-                    <![CDATA[
-                    Messagebox.show("修改成功", "修改成功", Messagebox.OK, Messagebox.INFORMATION);
-                    ]]>
-                </attribute>
-            </button>
-            <button label="取消" />
-            </div>
-        </panelchildren>
-    </panel>
+    
+   
     <zscript>
     String[] carmark = { 
         "Alfa Romeo", "Audi", "Acura", "Aston Martin", 
@@ -130,4 +96,4 @@
      ListModel dictModel= new SimpleListModel(carmark);
      model.setModel(dictModel);
     </zscript>
-</window>
+ </window>

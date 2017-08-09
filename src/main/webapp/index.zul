@@ -1,5 +1,5 @@
 
-<window title="搜尋頁面" width="700px" border="normal" apply="org.zkoss.bind.BindComposer"
+<window title="搜尋頁面" width="700px" height="550px" border="normal" apply="org.zkoss.bind.BindComposer"
     viewModel="@id('vm') @init('viewModel.SearchViewModel')">
      <panel >
         <panelchildren>
@@ -34,7 +34,7 @@
                     </menupopup>
                 </menu>
             </menubar>
-            <div height="450px" sclass="content">
+            <div height="600px" sclass="content">
                <hbox align="center">  
         搜尋：
         <textbox value="@bind(vm.keyword)" />
@@ -56,14 +56,15 @@
                 <listcell label="@bind(each.make)"></listcell>
                 <listcell>$<label value="@bind(each.price)" /></listcell>
                 <listcell>
-                    <button label="修改" disabled="@load(vm.selectedCar ne each)" href="update.zul" onClick="@command('update')" />
+                    <button label="修改" disabled="@load(vm.selectedCar ne each)" onClick="@command('showUpdateBox')" />
                     <button label="刪除" disabled="@load(vm.selectedCar ne each)" onClick="@command('delete')" />
                 </listcell>
             </listitem>
         </template>     
     </listbox>
-    
-    <hbox style="margin-top:20px" visible="@bind(not empty vm.selectedCar)">
+<!--      visible="@bind(not empty vm.selectedCar)"  -->
+<hbox visible="@bind(not empty vm.selectedCar)">
+    <hbox style="margin-top:20px" visible="@bind(vm.fileBox)">
         <image src="@bind(vm.selectedCar.preview)" width="300px" style="padding:10px" />
         <vbox> 
             <hlayout>
@@ -80,8 +81,12 @@
             <label value="@bind(vm.selectedCar.description)" />
         </vbox>
     </hbox>
+</hbox>
+    <hbox visible="@bind(vm.updateBox)">
+        <include src="update.zul" />
+    </hbox>
             </div>
         </panelchildren>
     </panel>
-    
+  
 </window>

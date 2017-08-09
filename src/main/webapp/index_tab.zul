@@ -1,4 +1,4 @@
-<window title="搜尋頁面" width="700px" border="normal"
+<window title="搜尋頁面" width="700px" height="610px" border="normal"
     apply="org.zkoss.bind.BindComposer"
     viewModel="@id('vm') @init('viewModel.SearchViewModel')">
     <panel>
@@ -34,7 +34,7 @@
                     </menupopup>
                 </menu>
             </menubar>
-            <div height="450px" sclass="content">
+            <div height="650px" sclass="content">
                 <hbox align="center">
                     搜尋：
                     <textbox value="@bind(vm.keyword)" />
@@ -56,7 +56,7 @@
                                 $<label value="@bind(each.price)" />
                             </listcell>
                             <listcell>
-                                <button label="修改" href="update.zul" onClick="@command('update')" />
+                                <button label="修改"  disabled="@load(vm.selectedCar ne each)" onClick="@command('showUpdateBox')" />
                                 <button label="刪除"  disabled="@load(vm.selectedCar ne each)" onClick="@command('delete')"/>
                             </listcell>
                         </listitem>
@@ -68,8 +68,8 @@
                         <tab label="外觀展示" />
                         <tab label="說明簡介" />
                         <tab label="規格價格" />
+                        <tab label="修改操作" selected="@bind(vm.updateTab)"/>
                     </tabs>
-
                     <tabpanels>
                         <tabpanel>
                             <image src="@bind(vm.selectedCar.preview)"
@@ -77,9 +77,7 @@
                         </tabpanel>
                         <tabpanel>
                             說明 :
-                            <label
-                                value="@bind(vm.selectedCar.description)" />
-
+                            <label value="@bind(vm.selectedCar.description)" />
                         </tabpanel>
                         <tabpanel>
                             <hlayout>
@@ -96,6 +94,11 @@
                                     $<label value="@bind(vm.selectedCar.price)" />
                                 </span>
                             </hlayout>
+                        </tabpanel>
+                        <tabpanel >
+                            <hbox visible="@bind(vm.updateBox)">
+                                <include src="update.zul" />
+                            </hbox>
                         </tabpanel>
                     </tabpanels>
                 </tabbox>
